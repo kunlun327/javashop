@@ -1,6 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>=
-<!DOCTYPE html>
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<script>
+	var data = "";
+	$(function () {
+		$.ajax({
+			type:"get",
+			url:"${pageContext.request.contextPath}/category?method=viewAllCategory",
+			dataType:"json",
+			success:function(list){
+				for(var i in list){  //i 下标
+					data += "<li><a href=''>"+list[i].cname+"</a></li>";
+				}
+				$("#category").html(data);
+			}
+		});
+	})
+</script>
 <!-- 登录 注册 购物车... -->
 <div class="container-fluid">
 	<div class="col-md-4">
@@ -35,11 +51,8 @@
 			</div>
 
 			<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-				<ul class="nav navbar-nav" id="categroy">
-					<li class="active"><a href="product_list.htm">手机数码<span class="sr-only">(current)</span></a></li>
-					<li><a href="#">电脑办公</a></li>
-					<li><a href="#">电脑办公</a></li>
-					<li><a href="#">电脑办公</a></li>
+				<ul class="nav navbar-nav" id="category">
+
 				</ul>
 				<form class="navbar-form navbar-right" role="search">
 					<div class="form-group">
@@ -51,4 +64,6 @@
 		</div>
 	</nav>
 </div>
-<script src="${pageContext.request.contextPath}/js/jquery-1.11.3.min.js"></script>
+
+
+
